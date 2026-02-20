@@ -14,7 +14,7 @@ CREATE TABLE CUSTOMERS(
 	zip_code	varchar(100)
 )
 go
-insert into CUSTOMERS values ('Jose', 'mosteiro', '11998888888', 'josem@gmail.com', 'rua do padre', 'S„o Paulo', 'SP', '04444555')
+insert into CUSTOMERS values ('Jose', 'mosteiro', '11998888888', 'josem@gmail.com', 'rua do padre', 'S√£o Paulo', 'SP', '04444555')
 insert into CUSTOMERS values ('Joares', 'monte', '11998888889', 'joares@gmail.com', 'rua Um', 'Belo Horizonte', 'MG', '04444555')
 insert into CUSTOMERS values ('Janaina', 'priscila', '11998888858', 'janaina@gmail.com', 'rua Dois', 'Cuiaba', 'MT', '04444555')
 insert into CUSTOMERS values ('Karina', 'Nascimento', '11998888288', 'karina@gmail.com', 'rua Tres', 'Rio de Janeiro', 'RJ', '04444555')
@@ -32,7 +32,7 @@ create table stores(
 	zip_code	varchar(100)
 )
 go
-insert into stores values ('mosteiro', '11998888888', 'josem@gmail.com', 'rua do padre', 'S„o Paulo', 'SP', '04444555')
+insert into stores values ('mosteiro', '11998888888', 'josem@gmail.com', 'rua do padre', 'S√£o Paulo', 'SP', '04444555')
 insert into stores values ('monte', '11998888889', 'joares@gmail.com', 'rua Um', 'Belo Horizonte', 'MG', '04444555')
 insert into stores values ('priscila', '11998888858', 'janaina@gmail.com', 'rua Dois', 'Cuiaba', 'MT', '04444555')
 insert into stores values ('Nascimento', '11998888288', 'karina@gmail.com', 'rua Tres', 'Rio de Janeiro', 'RJ', '04444555')
@@ -143,10 +143,10 @@ insert into stocks values (1, 10)
 insert into stocks values (2, 10)
 insert into stocks values (3, 10)
 insert into stocks values (4, 10)
-
---1 - Selecionar todos os clientes que n„o tem compras
+go
+--1 - Selecionar todos os clientes que n√£o tem compras
 select * from CUSTOMERS c where not exists (select top 1 1 from orders o where o.customer_id = c.customer_id)
--- 2 - Listar os Produtos que n„o tenham sido comprados
+-- 2 - Listar os Produtos que n√£o tenham sido comprados
 select * from product p where not exists (select top 1 1 from order_items it where it.product_id = p.product_id)
 -- 3 - Listar os Produtos sem Estoque
 select * from product p where not exists (select top 1 1 from stocks st where st.product_id = p.product_id)
@@ -160,8 +160,9 @@ inner join order_items oi on oi.order_id = os.order_id
 inner join product p on p.product_id = oi.product_id
 inner join brands b on b.brand_id = p.brand_id
 group by st.first_name, b.brand_name
--- 5 - Listar os Funcionarios que n„o estejam relacionados a um Pedido.
+-- 5 - Listar os Funcionarios que n√£o estejam relacionados a um Pedido.
 select * from staffs st where not exists (select top 1 1 from orders od where od.staff_id = st.staff_id)
+
 
 
 
